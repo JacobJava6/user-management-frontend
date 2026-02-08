@@ -8,6 +8,7 @@ pipeline {
         EC2_HOST     = '13.60.72.77'
         EC2_USER     = 'ubuntu'
         DEPLOY_PATH  = '/var/www/angular-app'
+        REPO_URL     = 'https://github.com/JacobJava6/user-management-frontend.git'
     }
     parameters {
         choice(
@@ -20,7 +21,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'Main',
-                    url: 'https://github.com/neerajbalodi/user-management-frontend.git'
+                    url: "${REPO_URL}"
             }
         }
         stage('Install Dependencies') {
