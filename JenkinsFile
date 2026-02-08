@@ -62,16 +62,16 @@ pipeline {
                         ls -la dist.tar.gz
                         
                         echo "=== Step 3: Testing SSH connection ==="
-                        ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 ubuntu@13.60.72.77 "echo 'SSH OK'"
+                        ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 ubuntu@${EC2_HOST} "echo 'SSH OK'"
                         
                         echo "=== Step 4: Copying file ==="
-                        scp -v -o StrictHostKeyChecking=no dist.tar.gz ubuntu@13.60.72.77:/tmp/
+                        scp -v -o StrictHostKeyChecking=no dist.tar.gz ubuntu@${EC2_HOST}:/tmp/
                         
                         echo "=== Step 5: Verifying copy ==="
-                        ssh -o StrictHostKeyChecking=no ubuntu@13.60.72.77 "ls -la /tmp/dist.tar.gz"
+                        ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} "ls -la /tmp/dist.tar.gz"
                         
                         echo "=== Step 6: Deploying ==="
-                        ssh -o StrictHostKeyChecking=no ubuntu@13.60.72.77 "
+                        ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} "
                             sudo mkdir -p /var/www/angular-app
                             sudo rm -rf /var/www/angular-app/*
                             sudo tar -xzf /tmp/dist.tar.gz -C /var/www/angular-app
@@ -80,7 +80,7 @@ pipeline {
                         "
                         
                         echo "=== Step 7: Verifying deployment ==="
-                        ssh -o StrictHostKeyChecking=no ubuntu@13.60.72.77 "ls -la /var/www/angular-app/"
+                        ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} "ls -la /var/www/angular-app/"
                         
                         echo "=== DEPLOY COMPLETE ==="
                     '''
