@@ -5,7 +5,7 @@ pipeline {
     }
     environment {
         APP_NAME     = 'user-management'
-        EC2_HOST     = '13.60.72.77'
+        EC2_HOST     = '3.83.35.11'
         EC2_USER     = 'ubuntu'
         DEPLOY_PATH  = '/var/www/angular-app'
         REPO_URL     = 'https://github.com/JacobJava6/user-management-frontend.git'
@@ -46,7 +46,7 @@ pipeline {
                 echo "Environment: ${params.ENVIRONMENT}"
                 echo "Target: ${EC2_USER}@${EC2_HOST}"
                 
-                sshagent(['ec2-ssh-key']) {
+                sshagent(['ec2-ubuntu-key']) {
                     sh '''
                         echo "=== Step 1: Finding dist folder ==="
                         if [ -d "dist/user-management/browser" ]; then
