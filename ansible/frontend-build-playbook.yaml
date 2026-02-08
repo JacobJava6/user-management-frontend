@@ -1,6 +1,6 @@
 ---
 - name: Frontend Build Configuration
-  hosts: local
+  hosts: localhost
   become: true
 
   tasks:
