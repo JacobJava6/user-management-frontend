@@ -1,0 +1,11 @@
+---
+- name: Frontend Build Configuration
+  hosts: local
+  become: true
+
+  tasks:
+
+    - name: Update environment
+      path: ../src/environment/environment.ts
+      lineinfile:
+        regexp: 'apiUrl'
